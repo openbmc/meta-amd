@@ -1,0 +1,83 @@
+#!/bin/bash
+
+GPIO_BASE=$(cat /sys/devices/platform/ahb/ahb:apb/1e780000.gpio/gpio/*/base)
+#MGMT_ASSERT_PWR_BTN - Asserts the system power button, GPIO M0, Active High,  (Default = Low)
+GPIO_PWR_BTN=$(($GPIO_BASE + 96 + 0))
+#MGMT_ASSERT_RST_BTN - Assert the system cold reset button, GPIO M1, Active High,  (Default = Low)
+GPIO_RST_BTN=$(($GPIO_BASE + 96 + 1))
+# MGMT_ASSERT_BMC_READY - Hold low until BMC has completed initialization, then drive high, GPIO M7,  (Default = Low)
+GPIO_BMC_READY=$((${GPIO_BASE} + 96 + 7))
+
+# Usage of this utility
+function usage() {
+	echo "usage: power-util [on|off|cycle|status|reset]";
+}
+
+power_off() {
+	echo "Shutting down Server"
+	POWER_STATUS=off
+	printf %s "$POWER_STATUS" > /tmp/power_status
+	echo 1 > /sys/class/gpio/gpio${GPIO_PWR_BTN}/value
+	# Long Press
+	sleep 5
+	echo 0 > /sys/class/gpio/gpio${GPIO_PWR_BTN}/value
+}
+
+power_on() {
+	echo "Powering on Server"
+	echo 1 > /sys/class/gpio/gpio${GPIO_PWR_BTN}/value
+	# Short Press
+	sleep 1
+	echo 0 > /sys/class/gpio/gpio${GPIO_PWR_BTN}/value
+	POWER_STATUS=on
+	printf %s "$POWER_STATUS" > /tmp/power_status
+}
+
+power_status() {
+	POWER_STATUS=$(cat /tmp/power_status)
+	echo ${POWER_STATUS}
+}
+
+power_reset() {
+	echo "Toggle Cold Reset"
+	echo 1 > /sys/class/gpio/gpio${GPIO_RST_BTN}/value
+	sleep 1
+	echo 0 > /sys/class/gpio/gpio${GPIO_RST_BTN}/value
+}
+
+if [ $# -lt 1 ]; then
+	echo "Total number of parameter=$#"
+	echo "Insufficient parameter"
+	usage;
+	exit 0;
+fi
+
+if [ $1 = "on" ]; then
+	if [ $(power_status) == "off" ]; then
+		power_on
+	fi
+elif [ $1 = "off" ]; then
+	if [ $(power_status) == "on" ]; then
+		power_off
+	fi
+elif [ $1 == "cycle" ]; then
+	if [ $(power_status) == "on" ]; then
+		power_off
+	else
+		echo "WARNING: Powering on server"
+		power_on
+	fi
+elif [ $1 == "reset" ]; then
+	if [ $(power_status) == "on" ]; then
+		power_reset
+	else
+		echo "ERROR: Server not powered on"
+	fi
+elif [ $1 == "status" ]; then
+	power_status
+else
+	echo "Invalid parameter=$1"
+	usage;
+fi
+
+exit 0;
