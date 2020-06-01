@@ -25,24 +25,14 @@ SUMMARY_${PN}-chassis = "AMD Chassis"
 RDEPENDS_${PN}-chassis = ""
 
 SUMMARY_${PN}-fans = "AMD Fans"
-RDEPENDS_${PN}-fans = " \
-        phosphor-pid-control \
-        "
+RDEPENDS_${PN}-fans = ""
 
 SUMMARY_${PN}-flash = "AMD Flash"
-RDEPENDS_${PN}-flash = " \
-        phosphor-software-manager \
-        "
+RDEPENDS_${PN}-flash = ""
 
 SUMMARY_${PN}-system = "AMD System"
 RDEPENDS_${PN}-system = " \
-        entity-manager \
-        dbus-sensors \
         amd-powerctrl \
-        phosphor-ipmi-ipmb \
-        phosphor-hostlogger \
-        phosphor-sel-logger \
-        ipmitool \
-        phosphor-post-code-manager \
-        phosphor-host-postd \
+        bmcweb \
+        phosphor-webui \
         "
