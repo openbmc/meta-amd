@@ -28,7 +28,9 @@ SUMMARY_${PN}-fans = "AMD Fans"
 RDEPENDS_${PN}-fans = ""
 
 SUMMARY_${PN}-flash = "AMD Flash"
-RDEPENDS_${PN}-flash = ""
+RDEPENDS_${PN}-flash = " \
+        phosphor-software-manager \
+        "
 
 SUMMARY_${PN}-system = "AMD System"
 RDEPENDS_${PN}-system = " \
