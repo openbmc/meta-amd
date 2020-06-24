@@ -1,23 +1,23 @@
-From 3edccfb5c904041b784618ae5451ffea03d15acb Mon Sep 17 00:00:00 2001
+From 1999dcdab0de609fc94e188176edc7eaabd7afbb Mon Sep 17 00:00:00 2001
 From: Supreeth Venkatesh <supreeth.venkatesh@amd.com>
 Date: Wed, 27 May 2020 14:45:32 -0500
-Subject: [PATCH] linux-aspeed/dts: Initial device tree for AMD EthanolX
+Subject: [PATCH 1/1] linux-aspeed/dts: Initial device tree for AMD EthanolX
 
 This patch provides initial device tree for AMD EthanolX platform.
 It describes I2c devices, Fans, Kcs devices, Uarts, Mac, LEDs, etc.
 
 Signed-off-by: Supreeth Venkatesh <supreeth.venkatesh@amd.com>
 ---
- arch/arm/boot/dts/aspeed-bmc-amd-ethanolx.dts | 305 ++++++++++++++++++
- 1 file changed, 305 insertions(+)
+ arch/arm/boot/dts/aspeed-bmc-amd-ethanolx.dts | 209 ++++++++++++++++++
+ 1 file changed, 209 insertions(+)
  create mode 100644 arch/arm/boot/dts/aspeed-bmc-amd-ethanolx.dts
 
 diff --git a/arch/arm/boot/dts/aspeed-bmc-amd-ethanolx.dts b/arch/arm/boot/dts/aspeed-bmc-amd-ethanolx.dts
 new file mode 100644
-index 000000000000..d97bf9b9de96
+index 000000000000..ae19f6a9b6d6
 --- /dev/null
 +++ b/arch/arm/boot/dts/aspeed-bmc-amd-ethanolx.dts
-@@ -0,0 +1,305 @@
+@@ -0,0 +1,209 @@
 +// SPDX-License-Identifier:	Apache v2
 +// Copyright (c) 2020 AMD Inc.
 +// Author: Supreeth Venkatesh <supreeth.venkatesh@amd.com>
@@ -42,7 +42,7 @@ index 000000000000..d97bf9b9de96
 +		bootargs = "console=ttyS4,115200 earlyprintk";
 +	};
 +	leds {
-+	compatible = "gpio-leds";
++		compatible = "gpio-leds";
 +
 +		fault {
 +			gpios = <&gpio ASPEED_GPIO(A, 2) GPIO_ACTIVE_LOW>;
@@ -102,144 +102,48 @@ index 000000000000..d97bf9b9de96
 +			&pinctrl_adc4_default>;
 +};
 +
-+&i2c {
-+	//APML for P0
-+	i2c1: i2c-bus@80 {
-+		reg = <0x80 0x40>;
-+		status = "okay";
++// Thermal Sensors
++&i2c7 {
++	status = "okay";
++
++	lm75a@48 {
++		compatible = "national,lm75a";
++		reg = <0x48>;
 +	};
 +
-+	//APML for P1
-+	i2c2: i2c-bus@c0 {
-+		reg = <0xc0 0x40>;
-+		status = "okay";
++	lm75a@49 {
++		compatible = "national,lm75a";
++		reg = <0x49>;
 +	};
 +
-+	//FPGA Side band
-+	i2c3: i2c-bus@100 {
-+		reg = <0x100 0x40>;
-+		status = "okay";
++	lm75a@4a {
++		compatible = "national,lm75a";
++		reg = <0x4a>;
 +	};
 +
-+	//BMC serial EEPROM
-+	i2c4: i2c-bus@140 {
-+		reg = <0x140 0x40>;
-+		status = "okay";
++	lm75a@4b {
++		compatible = "national,lm75a";
++		reg = <0x4b>;
 +	};
 +
-+	//P0 Voltage Regulators
-+	i2c5: i2c-bus@180 {
-+		reg = <0x180 0x40>;
-+		status = "okay";
-+
-+		isl69147@61 {
-+			compatible = "renesas,isl69147";
-+			reg = <0x61>;
-+		};
-+
-+		isl69144@63 {
-+			compatible = "renesas,isl69144";
-+			reg = <0x63>;
-+		};
-+
-+		isl68127@64 {
-+			compatible = "renesas,isl68127";
-+			reg = <0x64>;
-+		};
-+
-+		isl68127@65 {
-+			compatible = "renesas,isl68127";
-+			reg = <0x65>;
-+		};
++	lm75a@4c {
++		compatible = "national,lm75a";
++		reg = <0x4c>;
 +	};
 +
-+	//P1 Voltage Regulators
-+	i2c6: i2c-bus@1c0 {
-+		reg = <0x1c0 0x40>;
-+		status = "okay";
-+
-+		isl69147@61 {
-+			compatible = "renesas,isl69147";
-+			reg = <0x61>;
-+		};
-+
-+		isl69144@63 {
-+			compatible = "renesas,isl69144";
-+			reg = <0x63>;
-+		};
-+
-+			isl68127@64 {
-+			compatible = "renesas,isl68127";
-+			reg = <0x64>;
-+		};
-+
-+			isl68127@65 {
-+			compatible = "renesas,isl68127";
-+			reg = <0x65>;
-+		};
++	lm75a@4d {
++		compatible = "national,lm75a";
++		reg = <0x4d>;
 +	};
 +
-+	//Backplane and NVMe
-+	i2c7: i2c-bus@300 {
-+		reg = <0x300 0x40>;
-+		status = "okay";
-+
-+		mg9098@60 {
-+			compatible = "ami,mg9098";
-+			reg = <0x60>;
-+		};
-+
-+		pca9545apw@70 {
-+			compatible = "ti,pca9545apw";
-+			reg = <0x70>;
-+			//Todo: Map P1_NVME0_SMBUS...P1_NVME3_SMBUS
-+		};
++	lm75a@4e {
++		compatible = "national,lm75a";
++		reg = <0x4e>;
 +	};
 +
-+	// Thermal Sensors
-+	i2c8: i2c-bus@340 {
-+		reg =	<0x340 0x40>;
-+		status = "okay";
-+
-+		lm75a@48 {
-+			compatible = "ti,lm75a";
-+			reg = <0x48>;
-+		};
-+
-+		lm75a@49 {
-+			compatible = "ti,lm75a";
-+			reg = <0x49>;
-+		};
-+
-+		lm75a@4a {
-+			compatible = "ti,lm75a";
-+			reg = <0x4a>;
-+		};
-+
-+		lm75a@4b {
-+			compatible = "ti,lm75a";
-+			reg = <0x4b>;
-+		};
-+
-+		lm75a@4c {
-+			compatible = "ti,lm75a";
-+			reg = <0x4c>;
-+		};
-+
-+		lm75a@4d {
-+			compatible = "ti,lm75a";
-+			reg = <0x4d>;
-+		};
-+
-+		lm75a@4e {
-+			compatible = "ti,lm75a";
-+			reg = <0x4e>;
-+		};
-+
-+		lm75a@4f {
-+			compatible = "ti,lm75a";
-+			reg = <0x4f>;
-+		};
++	lm75a@4f {
++		compatible = "national,lm75a";
++		reg = <0x4f>;
 +	};
 +};
 +
@@ -323,6 +227,6 @@ index 000000000000..d97bf9b9de96
 +
 +
 +
---
+-- 
 2.17.1
 
