@@ -36,5 +36,7 @@ SUMMARY_${PN}-system = "AMD System"
 RDEPENDS_${PN}-system = " \
         amd-powerctrl \
         bmcweb \
+        entity-manager \
+        ipmitool \
         phosphor-webui \
         "
