@@ -1,24 +1,53 @@
-From 1999dcdab0de609fc94e188176edc7eaabd7afbb Mon Sep 17 00:00:00 2001
+From 6411fa78f2caa3dfcb938083baf63fe00aa8f181 Mon Sep 17 00:00:00 2001
 From: Supreeth Venkatesh <supreeth.venkatesh@amd.com>
 Date: Wed, 27 May 2020 14:45:32 -0500
-Subject: [PATCH 1/1] linux-aspeed/dts: Initial device tree for AMD EthanolX
+Subject: [PATCH v3 1/1] ARM:dts:aspeed: Initial device tree for AMD EthanolX
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-This patch provides initial device tree for AMD EthanolX platform.
-It describes I2c devices, Fans, Kcs devices, Uarts, Mac, LEDs, etc.
+Initial introduction of AMD EthanolX platform equipped with an
+Aspeed ast2500 BMC manufactured by AMD.
+
+AMD EthanolX platform is an AMD customer reference board with an
+Aspeed ast2500 BMC manufactured by AMD.
+This adds AMD EthanolX device tree file including the flash layout
+used by EthanolX BMC machines.
+
+This also adds an entry of AMD EthanolX device tree file in Makefile.
 
 Signed-off-by: Supreeth Venkatesh <supreeth.venkatesh@amd.com>
 ---
- arch/arm/boot/dts/aspeed-bmc-amd-ethanolx.dts | 209 ++++++++++++++++++
- 1 file changed, 209 insertions(+)
+Changes since v2:
+* Removed incorrect I2C0 and I2C1 Reg addresses
+
+Changes since v1:
+* Addressed review comment regarding SPDX License Identifier
+* Added I2c0 and I2c1 which cater to AMD's APML Interface
+---
+ arch/arm/boot/dts/Makefile                    |   1 +
+ arch/arm/boot/dts/aspeed-bmc-amd-ethanolx.dts | 219 ++++++++++++++++++
+ 2 files changed, 220 insertions(+)
  create mode 100644 arch/arm/boot/dts/aspeed-bmc-amd-ethanolx.dts
 
+diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
+index d6dfdf73e66b..55ed881d2ebc 100644
+--- a/arch/arm/boot/dts/Makefile
++++ b/arch/arm/boot/dts/Makefile
+@@ -1281,6 +1281,7 @@ dtb-$(CONFIG_ARCH_ZX) += zx296702-ad1.dtb
+ dtb-$(CONFIG_ARCH_ASPEED) += \
+ 	aspeed-ast2500-evb.dtb \
+ 	aspeed-ast2600-evb.dtb \
++	aspeed-bmc-amd-ethanolx.dtb \
+ 	aspeed-bmc-arm-centriq2400-rep.dtb \
+ 	aspeed-bmc-arm-stardragon4800-rep2.dtb \
+ 	aspeed-bmc-facebook-cmm.dtb \
 diff --git a/arch/arm/boot/dts/aspeed-bmc-amd-ethanolx.dts b/arch/arm/boot/dts/aspeed-bmc-amd-ethanolx.dts
 new file mode 100644
-index 000000000000..ae19f6a9b6d6
+index 000000000000..60ba86f3e5bc
 --- /dev/null
 +++ b/arch/arm/boot/dts/aspeed-bmc-amd-ethanolx.dts
-@@ -0,0 +1,209 @@
-+// SPDX-License-Identifier:	Apache v2
+@@ -0,0 +1,219 @@
++// SPDX-License-Identifier: GPL-2.0
 +// Copyright (c) 2020 AMD Inc.
 +// Author: Supreeth Venkatesh <supreeth.venkatesh@amd.com>
 +/dts-v1/;
@@ -74,7 +103,7 @@ index 000000000000..ae19f6a9b6d6
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&pinctrl_rmii1_default>;
 +	clocks = <&syscon ASPEED_CLK_GATE_MAC1CLK>,
-+			 <&syscon ASPEED_CLK_MAC1RCLK>;
++		 <&syscon ASPEED_CLK_MAC1RCLK>;
 +	clock-names = "MACCLK", "RCLK";
 +};
 +
@@ -83,7 +112,7 @@ index 000000000000..ae19f6a9b6d6
 +	status = "okay";
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&pinctrl_txd1_default
-+				 &pinctrl_rxd1_default>;
++		     &pinctrl_rxd1_default>;
 +};
 +
 +&uart5 {
@@ -96,10 +125,20 @@ index 000000000000..ae19f6a9b6d6
 +
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&pinctrl_adc0_default
-+			&pinctrl_adc1_default
-+			&pinctrl_adc2_default
-+			&pinctrl_adc3_default
-+			&pinctrl_adc4_default>;
++		     &pinctrl_adc1_default
++		     &pinctrl_adc2_default
++		     &pinctrl_adc3_default
++		     &pinctrl_adc4_default>;
++};
++
++//APML for P0
++&i2c0 {
++	status = "okay";
++};
++
++//APML for P1
++&i2c1 {
++	status = "okay";
 +};
 +
 +// Thermal Sensors
