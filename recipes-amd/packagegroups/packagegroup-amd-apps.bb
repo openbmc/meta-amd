@@ -22,7 +22,10 @@ RPROVIDES_${PN}-flash += "virtual-obmc-flash-mgmt"
 RPROVIDES_${PN}-system += "virtual-obmc-system-mgmt"
 
 SUMMARY_${PN}-chassis = "AMD Chassis"
-RDEPENDS_${PN}-chassis = ""
+RDEPENDS_${PN}-chassis = " \
+        x86-power-control \
+        obmc-host-failure-reboots \
+        "
 
 SUMMARY_${PN}-fans = "AMD Fans"
 RDEPENDS_${PN}-fans = ""
@@ -34,7 +37,6 @@ RDEPENDS_${PN}-flash = " \
 
 SUMMARY_${PN}-system = "AMD System"
 RDEPENDS_${PN}-system = " \
-        amd-powerctrl \
         bmcweb \
         entity-manager \
         ipmitool \
