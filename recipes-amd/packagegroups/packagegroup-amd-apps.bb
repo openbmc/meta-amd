@@ -40,5 +40,6 @@ RDEPENDS_${PN}-system = " \
         bmcweb \
         entity-manager \
         ipmitool \
+        phosphor-hostlogger \
         phosphor-webui \
         "
