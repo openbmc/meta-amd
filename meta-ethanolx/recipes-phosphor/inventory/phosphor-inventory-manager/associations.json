@@ -1,0 +1,30 @@
+[
+    {
+        "path": "system/chassis",
+        "endpoints":
+        [
+            {
+                "types":
+                {
+                    "rType": "chassis",
+                    "fType": "all_sensors"
+                },
+                "paths":
+                [
+                    "/xyz/openbmc_project/sensors/temperature/BMC",
+                    "/xyz/openbmc_project/sensors/temperature/PCIe_Slots",
+                    "/xyz/openbmc_project/sensors/temperature/DIMM_P0_ABCD",
+                    "/xyz/openbmc_project/sensors/temperature/DIMM_P0_EFGH",
+                    "/xyz/openbmc_project/sensors/temperature/DIMM_P1_ABCD",
+                    "/xyz/openbmc_project/sensors/temperature/DIMM_P1_EFGH",
+                    "/xyz/openbmc_project/sensors/temperature/DIMM_P0_EFGH_P1_ABCD",
+                    "/xyz/openbmc_project/sensors/temperature/DIMM_P0_ABCD_P1_EFGH",
+                    "/xyz/openbmc_project/sensors/fan_tach/P0_Fan_Speed",
+                    "/xyz/openbmc_project/sensors/fan_tach/P1_Fan_Speed",
+                    "/xyz/openbmc_project/sensors/utilization/CPU",
+                    "/xyz/openbmc_project/sensors/utilization/Memory"
+                ]
+            }
+        ]
+    }
+]
