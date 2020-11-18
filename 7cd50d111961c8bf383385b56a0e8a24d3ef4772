@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "918de303_00c38404",
+        "filename": "meta-ethanolx/recipes-phosphor/inventory/phosphor-inventory-manager-chassis/chassis.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000299
+      },
+      "writtenOn": "2020-11-18T14:11:28Z",
+      "side": 1,
+      "message": "EthanolX is not really a \"RackMount\". Also, we are planning to use entity-manager for inventory.",
+      "revId": "7cd50d111961c8bf383385b56a0e8a24d3ef4772",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
