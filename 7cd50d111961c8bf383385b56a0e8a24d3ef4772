@@ -16,6 +16,24 @@
       "revId": "7cd50d111961c8bf383385b56a0e8a24d3ef4772",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a639d201_1ef7d48a",
+        "filename": "meta-ethanolx/recipes-phosphor/inventory/phosphor-inventory-manager-chassis/chassis.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2020-11-18T15:13:36Z",
+      "side": 1,
+      "message": "I just took this value from other boards, that use this method to populate sensors on Redfish, for example:\nhttps://github.com/openbmc/meta-ibm/blob/master/meta-romulus/recipes-phosphor/inventory/inventory-cleanup/inventory-cleanup.yaml\nhttps://github.com/openbmc/meta-ibm/blob/master/meta-palmetto/recipes-phosphor/inventory/inventory-cleanup/inventory-cleanup.yaml\nhttps://github.com/openbmc/meta-inspur/blob/master/meta-fp5280g2/recipes-phosphor/inventory/phosphor-inventory-manager-chassis/chassis.yaml\nhttps://github.com/openbmc/meta-quanta/blob/master/meta-gbs/recipes-phosphor/inventory/inventory-cleanup/inventory-cleanup.yaml\n\nAll the available values are listed here:\nhttps://github.com/openbmc/bmcweb/blob/929d4b57f10bc4200e16b71fbcf32521d8cc23c1/static/redfish/v1/JsonSchemas/Chassis/Chassis.json#L430\nBut it seems like the exact value doesn\u0027t matter now. \"RackMount\" is hardcoded in the bmcweb code anyway\nhttps://github.com/openbmc/bmcweb/blob/929d4b57f10bc4200e16b71fbcf32521d8cc23c1/redfish-core/lib/chassis.hpp#L295\nWe can choose one of the available values in case it would be supported in the future, what value do you prefer?\n\nI don\u0027t mind if this code will be superseded in the future, but can we use this method while entity-manager solution is not ready?",
+      "parentUuid": "918de303_00c38404",
+      "revId": "7cd50d111961c8bf383385b56a0e8a24d3ef4772",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
