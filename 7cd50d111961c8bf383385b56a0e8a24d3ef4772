@@ -34,6 +34,29 @@
       "revId": "7cd50d111961c8bf383385b56a0e8a24d3ef4772",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "265854b0_4a972a24",
+        "filename": "meta-ethanolx/recipes-phosphor/inventory/phosphor-inventory-manager_%.bbappend",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000879
+      },
+      "writtenOn": "2020-11-23T06:55:51Z",
+      "side": 1,
+      "message": "0644",
+      "range": {
+        "startLine": 9,
+        "startChar": 15,
+        "endLine": 9,
+        "endChar": 19
+      },
+      "revId": "7cd50d111961c8bf383385b56a0e8a24d3ef4772",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
