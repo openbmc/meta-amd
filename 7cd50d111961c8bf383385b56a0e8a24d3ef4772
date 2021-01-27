@@ -57,6 +57,30 @@
       "revId": "7cd50d111961c8bf383385b56a0e8a24d3ef4772",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5fad2f3_4ad4b4e5",
+        "filename": "meta-ethanolx/recipes-phosphor/inventory/phosphor-inventory-manager_%.bbappend",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2021-01-27T18:43:34Z",
+      "side": 1,
+      "message": "Sorry for the late answer.\nI\u0027ve written this file based on the other \"phosphor-inventory-manager_%.bbappend\" files and they all have \u00270755\u0027 mode for the \u0027associations.json\u0027 file. Should we change them as well to the use of \u00270644\u0027 mode?",
+      "parentUuid": "265854b0_4a972a24",
+      "range": {
+        "startLine": 9,
+        "startChar": 15,
+        "endLine": 9,
+        "endChar": 19
+      },
+      "revId": "7cd50d111961c8bf383385b56a0e8a24d3ef4772",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
