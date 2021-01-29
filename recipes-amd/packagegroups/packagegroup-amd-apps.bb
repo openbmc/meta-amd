@@ -42,4 +42,6 @@ RDEPENDS_${PN}-system = " \
         ipmitool \
         phosphor-hostlogger \
         phosphor-webui \
+        phosphor-post-code-manager \
+        phosphor-host-postd \
         "
